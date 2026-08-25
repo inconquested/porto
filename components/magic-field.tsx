@@ -23,6 +23,9 @@ export function MagicField() {
     if (!canvas || !ctx2d) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isMobile = window.matchMedia("(max-width: 768px)").matches || window.matchMedia("(pointer: coarse)").matches;
+    const nav = navigator as unknown as { deviceMemory?: number; hardwareConcurrency?: number; connection?: { saveData?: boolean; effectiveType?: string } };
+    const isLowEnd = (nav.deviceMemory && nav.deviceMemory <= 4) || (typeof nav.hardwareConcurrency === "number" && nav.hardwareConcurrency <= 4) || nav.connection?.saveData;
 
     // Accent colour, kept in sync with the active theme (light/dark toggle).
     const rgb = { r: 129, g: 140, b: 248 };
@@ -70,8 +73,10 @@ export function MagicField() {
       canvas.style.height = `${h}px`;
       ctx2d.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      // density scaled to viewport area, capped for perf
-      const count = Math.min(96, Math.round((w * h) / 24000));
+      // density scaled to viewport area, capped for perf — much lighter on mobile/low-end
+      const base = isMobile || isLowEnd ? 24000 * 2.2 : 24000;
+      const cap = isMobile || isLowEnd ? 36 : 96;
+      const count = Math.min(cap, Math.round((w * h) / base));
       motes = Array.from({ length: count }, () => ({
         x: rand(0, w),
         y: rand(0, h),
@@ -94,24 +99,26 @@ export function MagicField() {
       const sy = window.scrollY * 0.6;
       const py = (p: Mote) => ((p.y - sy) % h + h) % h;
 
-      // constellation links first (behind the motes), on parallaxed positions
-      for (let i = 0; i < motes.length; i++) {
-        const p = motes[i];
-        const px = p.x;
-        const pyy = py(p);
-        for (let j = i + 1; j < motes.length; j++) {
-          const q = motes[j];
-          const dx = px - q.x;
-          const dy = pyy - py(q);
-          const d2 = dx * dx + dy * dy;
-          if (d2 < LINK * LINK) {
-            const t = 1 - Math.sqrt(d2) / LINK;
-            ctx2d.strokeStyle = `rgba(${r},${g},${b},${t * 0.12})`;
-            ctx2d.lineWidth = 1;
-            ctx2d.beginPath();
-            ctx2d.moveTo(px, pyy);
-            ctx2d.lineTo(q.x, py(q));
-            ctx2d.stroke();
+      // constellation links first (behind the motes), on parallaxed positions — skip on mobile
+      if (!skipLinks) {
+        for (let i = 0; i < motes.length; i++) {
+          const p = motes[i];
+          const px = p.x;
+          const pyy = py(p);
+          for (let j = i + 1; j < motes.length; j++) {
+            const q = motes[j];
+            const dx = px - q.x;
+            const dy = pyy - py(q);
+            const d2 = dx * dx + dy * dy;
+            if (d2 < LINK * LINK) {
+              const t = 1 - Math.sqrt(d2) / LINK;
+              ctx2d.strokeStyle = `rgba(${r},${g},${b},${t * 0.12})`;
+              ctx2d.lineWidth = 1;
+              ctx2d.beginPath();
+              ctx2d.moveTo(px, pyy);
+              ctx2d.lineTo(q.x, py(q));
+              ctx2d.stroke();
+            }
           }
         }
       }
@@ -161,12 +168,13 @@ export function MagicField() {
 
     build();
 
-    if (reduce) {
-      draw(0); // one static frame, no motion
+    if (reduce || isMobile || isLowEnd) {
+      draw(0); // static frame on mobile/low-end — biggest choppy win (no RAF)
       return () => {
         themeObserver.disconnect();
       };
     }
+    const skipLinks = false;
 
     const onMove = (e: PointerEvent) => {
       pointer.x = e.clientX;
@@ -186,7 +194,13 @@ export function MagicField() {
     };
     window.addEventListener("resize", onResize);
 
+    let frame = 0;
     const tick = (_t: number, deltaMs: number) => {
+      // on mobile throttle to ~30fps
+      if (isMobile) {
+        frame++;
+        if (frame % 2 !== 0) return;
+      }
       // normalize to ~60fps steps, clamp big gaps (tab refocus)
       const dt = Math.min(deltaMs / 16.67, 3);
       draw(dt);

@@ -489,6 +489,23 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                       href={it.link}
                       aria-label={it.ariaLabel}
                       data-index={idx + 1}
+                      onClick={(e) => {
+                        if (it.link.startsWith("#")) {
+                          e.preventDefault();
+                          closeMenu();
+                          const id = it.link;
+                          const el = document.querySelector(id) as HTMLElement | null;
+                          if (el) {
+                            // Lenis handles anchors, but fallback to native smooth
+                            el.scrollIntoView({ behavior: "smooth", block: "start" });
+                            history.pushState(null, "", id);
+                          } else {
+                            window.location.hash = id;
+                          }
+                        } else {
+                          closeMenu();
+                        }
+                      }}
                     >
                       <span className="sm-panel-itemLabel inline-block [transform-origin:50%_100%] will-change-transform">
                         {it.label}

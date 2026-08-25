@@ -2,6 +2,7 @@
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useIsCSR } from "@/components/render-mode";
 type Theme = "light" | "dark";
 type ThemeContextType = {
   theme: Theme;
@@ -19,17 +20,24 @@ export function useTheme() {
 }
 export function Providers({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
-  const [smooth, setSmooth] = useState(true);
+  const isCSR = useIsCSR();
+  const [smooth, setSmooth] = useState(() => !isCSR);
   useEffect(() => {
     // The pre-paint script in layout already set the class from localStorage /
     // system preference; sync React state to that external (DOM) source once.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setTheme(document.documentElement.classList.contains("dark") ? "dark" : "light");
+    // CSR (mobile / poor net / low-end) -> no Lenis: content paints first, avoids choppy
+    if (isCSR) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setSmooth(false);
+      return;
+    }
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const coarse = window.matchMedia("(pointer: coarse)").matches;
     const saveData = (navigator as unknown as { connection?: { saveData?: boolean } }).connection?.saveData;
     setSmooth(!reduce && !saveData && !(coarse && window.innerWidth < 768));
-  }, []);
+  }, [isCSR]);
   const toggleTheme = (origin?: { x: number; y: number }) => {
     const root = document.documentElement;
     // Read the live class, not React state, so rapid clicks can't desync.

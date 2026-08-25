@@ -3,8 +3,11 @@ import { Playfair_Display, Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
+import { headers } from "next/headers";
 import { cn } from "@/lib/utils";
+import { isMobileHint } from "@/lib/render";
 import { Providers } from "@/components/providers";
+import { RenderModeProvider, CSRDefer } from "@/components/render-mode";
 import StaggeredMenu from "@/components/StaggeredMenu";
 import { SiteControls } from "@/components/site-controls";
 import { KeyboardNav } from "@/components/keyboard-nav";
@@ -109,8 +112,12 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     icons: {
-      icon: "/favicon.ico",
-      apple: "/logo.svg",
+      icon: [
+        { url: "/favicon.svg", sizes: "16x16", type: "image/svg+xml" },
+        { url: "/icon.svg", sizes: "32x32", type: "image/svg+xml" },
+        { url: "/icon.svg", sizes: "192x192", type: "image/svg+xml" },
+      ],
+      apple: [{ url: "/apple-icon.svg", sizes: "180x180", type: "image/svg+xml" }],
     },
     category: "portfolio",
   };
@@ -134,6 +141,8 @@ export default async function RootLayout({
   const messages = await getMessages();
   const locale = await getLocale();
   const t = await getTranslations("Header");
+  const ua = (await headers()).get("user-agent") ?? "";
+  const initialCSR = isMobileHint(ua); // bot->false (SSR), mobile->true (CSR)
 
   const menuItems = [
     { label: t("home"), ariaLabel: "Home section", link: "#home" },
@@ -197,33 +206,42 @@ export default async function RootLayout({
               "(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',d);}catch(e){}})()",
           }}
         />
-        <NextIntlClientProvider messages={messages}>
-          <Providers>
-            <div className="crt" aria-hidden="true" />
-            <MagicField />
+        <RenderModeProvider initialCSR={initialCSR}>
+          <NextIntlClientProvider messages={messages}>
+            <Providers>
+              <div className="crt" aria-hidden="true" />
+              {/* crawler/desktop: SSR immediate; mobile/poor: CSR after idle so text paints first */}
+              <CSRDefer>
+                <MagicField />
+              </CSRDefer>
 
-            <div className="fixed top-0 left-0 w-full h-[100dvh] z-40 pointer-events-none">
-              <StaggeredMenu
-                position="right"
-                colors={["#0c0c0c", "#141414"]}
-                accentColor="#6366f1"
-                menuButtonColor="#6366f1"
-                openMenuButtonColor="#6366f1"
-                logoUrl="/logo.svg"
-                items={menuItems}
-                displaySocials={false}
-                isFixed={false}
-              />
-            </div>
+              <div className="fixed top-0 left-0 w-full h-[100dvh] z-40 pointer-events-none">
+                <StaggeredMenu
+                  position="right"
+                  colors={["#0c0c0c", "#141414"]}
+                  accentColor="#6366f1"
+                  menuButtonColor="#6366f1"
+                  openMenuButtonColor="#6366f1"
+                  logoUrl="/logo.svg"
+                  items={menuItems}
+                  displaySocials={false}
+                  isFixed={false}
+                />
+              </div>
 
-            <SiteControls />
-            <KeyboardNav />
-            <SurfaceSpotlight />
-            <SpellCursor />
+              <SiteControls />
+              <KeyboardNav />
+              <CSRDefer>
+                <SurfaceSpotlight />
+              </CSRDefer>
+              <CSRDefer>
+                <SpellCursor />
+              </CSRDefer>
 
-            {children}
-          </Providers>
-        </NextIntlClientProvider>
+              {children}
+            </Providers>
+          </NextIntlClientProvider>
+        </RenderModeProvider>
       </body>
     </html>
   );

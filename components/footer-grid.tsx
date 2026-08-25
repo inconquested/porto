@@ -70,15 +70,16 @@ export function FooterGrid() {
   const [active, setActive] = useState<Map<number, string>>(new Map());
   const visibleRef = useRef(true);
 
-  // measure grid
+  // measure grid — on mobile use larger cells = fewer DOM nodes
   useEffect(() => {
     const el = containerRef.current?.parentElement;
     if (!el) return;
     const update = () => {
       const { width, height } = el.getBoundingClientRect();
-      const cell = 56; // 3.5rem
-      const cols = Math.max(8, Math.ceil(width / cell));
-      const rows = Math.max(6, Math.ceil(height / cell));
+      const isMobile = window.matchMedia("(max-width: 768px)").matches || window.matchMedia("(pointer: coarse)").matches;
+      const cell = isMobile ? 72 : 56; // 4.5rem on mobile = ~40% fewer cells
+      const cols = Math.max(isMobile ? 6 : 8, Math.ceil(width / cell));
+      const rows = Math.max(isMobile ? 4 : 6, Math.ceil(height / cell));
       const total = cols * rows;
       setDims({ cols, rows, total });
     };
@@ -110,15 +111,20 @@ export function FooterGrid() {
   useEffect(() => {
     if (reduce) return;
     if (dims.total === 0) return;
+    // hard kill on very low-end devices for mobile jank
+    const nav = navigator as unknown as { deviceMemory?: number; hardwareConcurrency?: number };
+    if (nav.deviceMemory && nav.deviceMemory <= 3) return;
+    if (typeof nav.hardwareConcurrency === "number" && nav.hardwareConcurrency <= 2) return;
 
     const timers = new Set<number>();
+    const isMobile = window.matchMedia("(max-width: 768px)").matches || window.matchMedia("(pointer: coarse)").matches;
 
     const tick = () => {
       if (!visibleRef.current) return;
       if (document.hidden) return;
 
-      // slow tempo: 1-2 cells per tick
-      const count = 1 + Math.floor(Math.random() * 4);
+      // slow tempo: mobile 1 cell, desktop 1-2
+      const count = isMobile ? 1 : 1 + Math.floor(Math.random() * 2);
       const picks: Array<{ idx: number; ch: string }> = [];
       for (let i = 0; i < count; i++) {
         const idx = Math.floor(Math.random() * dims.total);
@@ -133,7 +139,7 @@ export function FooterGrid() {
       });
 
       picks.forEach(({ idx }) => {
-        const dur = 2200 + Math.random() * 1400;
+        const dur = isMobile ? 2800 + Math.random() * 1200 : 2200 + Math.random() * 1400;
         const id = window.setTimeout(() => {
           setActive((prev) => {
             const next = new Map(prev);
@@ -146,11 +152,11 @@ export function FooterGrid() {
       });
     };
 
-    const interval = window.setInterval(tick, 620);
-    // initial slow scatter
+    const interval = window.setInterval(tick, isMobile ? 1400 : 620);
+    // initial slow scatter — fewer on mobile
     const seeding = window.setTimeout(() => {
-      for (let k = 0; k < 4; k++) tick();
-    }, 300);
+      for (let k = 0; k < (isMobile ? 2 : 4); k++) tick();
+    }, 500);
 
     return () => {
       window.clearInterval(interval);

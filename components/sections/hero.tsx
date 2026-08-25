@@ -10,14 +10,14 @@ const PixelBlast = dynamic(() => import("@/components/PixelBlast"), { ssr: false
 function PixelBlastDeferred() {
   const [ready, setReady] = useState(false);
   useEffect(() => {
-    const nav = navigator as unknown as { connection?: { saveData?: boolean; effectiveType?: string }; deviceMemory?: number };
+    const nav = navigator as unknown as { connection?: { saveData?: boolean; effectiveType?: string }; deviceMemory?: number; hardwareConcurrency?: number };
     if (nav.connection?.saveData) return;
-    if (nav.connection?.effectiveType && ["slow-2g", "2g"].includes(nav.connection.effectiveType)) return;
-    if (nav.deviceMemory && nav.deviceMemory <= 2) return;
-    if (window.matchMedia("(pointer: coarse)").matches && window.innerWidth < 768) {
-      const id = globalThis.setTimeout(() => setReady(true), 1200);
-      return () => globalThis.clearTimeout(id);
-    }
+    if (nav.connection?.effectiveType && ["slow-2g", "2g", "3g"].includes(nav.connection.effectiveType)) return;
+    if (nav.deviceMemory && nav.deviceMemory <= 4) return;
+    if (typeof nav.hardwareConcurrency === "number" && nav.hardwareConcurrency <= 4) return;
+    // skip entirely on coarse/mobile — WebGL diamond + ripples is the top mobile jank source
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (window.matchMedia("(max-width: 768px)").matches) return;
     const cb = () => setReady(true);
     const w = window as unknown as { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number; cancelIdleCallback?: (id: number) => void };
     if (w.requestIdleCallback) {
@@ -48,6 +48,8 @@ function PixelBlastDeferred() {
 export function Hero({ hero }: { hero: { main: string; subtitle: string; cta: string } }) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
+  const isCoarse = typeof window !== "undefined" ? window.matchMedia("(pointer: coarse)").matches : false;
+  const disableParallax = !!reduce || isCoarse;
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const fgOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const fgY = useTransform(scrollYProgress, [0, 0.6], [0, -60]);
@@ -60,7 +62,7 @@ export function Hero({ hero }: { hero: { main: string; subtitle: string; cta: st
         className="pointer-events-none absolute inset-0"
         style={{ background: "radial-gradient(72% 68% at 28% 44%, color-mix(in oklab, var(--background) 82%, transparent) 0%, transparent 72%)" }}
       />
-      <motion.div style={reduce ? undefined : { opacity: fgOpacity, y: fgY }} className="relative mx-auto w-full max-w-6xl">
+      <motion.div style={disableParallax ? undefined : { opacity: fgOpacity, y: fgY }} className="relative mx-auto w-full max-w-6xl">
         <div className="max-w-3xl">
           <motion.h1
             initial={reduce ? false : { y: 14 }}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" role="img" aria-label="Magicworks m">
+  <style>
+    rect{fill:#f9f9f6}
+    text{fill:#4f46e5}
+    @media (prefers-color-scheme: dark){
+      rect{fill:#0c0c0c}
+      text{fill:#818cf8}
+    }
+  </style>
+  <rect width="32" height="32" rx="7" fill="#f9f9f6"/>
+  <!-- small tab — preserved, airy -->
+  <text x="50%" y="52%" dominant-baseline="central" text-anchor="middle" font-family="'Great Vibes','Allura','Snell Roundhand','Brush Script MT','Segoe Script',cursive" font-size="20" font-style="italic" font-weight="400" letter-spacing="-0.01em">m</text>
+</svg>

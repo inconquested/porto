@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion, type MotionProps } from "framer-motion";
 import { Subtitle, EASE_OUT } from "@/components/section";
+import { CSRDefer } from "@/components/render-mode";
 import { FooterGrid } from "@/components/footer-grid";
 import { ArrowUp, GithubLogo, LinkedinLogo, EnvelopeSimple, XLogo, type Icon as PhosphorIcon } from "@phosphor-icons/react";
 
@@ -67,7 +68,9 @@ export function Footer({ footer }: { footer: FooterProps }) {
 
   return (
     <footer id="footer" className="footer-shell relative z-[2] w-full font-sans">
-      <FooterGrid />
+      <CSRDefer>
+        <FooterGrid />
+      </CSRDefer>
       <div className="relative z-[1] mx-auto w-full max-w-6xl px-6 pt-20 md:pt-28">
         <motion.div {...reveal()} className="flex items-center justify-between gap-4">
           <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-muted-foreground">[ EOF ]</span>
