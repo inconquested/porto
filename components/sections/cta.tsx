@@ -21,9 +21,9 @@ import {
 const SOCIALS = {
   github: { label: "GitHub", handle: "@inconquested", href: "https://github.com/inconquested", Icon: GithubLogo },
   linkedin: { label: "LinkedIn", handle: "in/muhamad-revan-aulia", href: "https://www.linkedin.com/in/muhamad-revan-aulia", Icon: LinkedinLogo },
-  x: { label: "X", handle: "@magicworks", href: "https://x.com/magicworks.dev", Icon: XLogo },
-  email: { label: "Email", handle: "hello@magicworks.dev", href: "mailto:hello@magicworks.dev", Icon: EnvelopeSimple },
-  whatsapp: { label: "WhatsApp", handle: "+62 812 0000 0000", href: "https://wa.me/6285187287828", Icon: WhatsappLogo },
+  x: { label: "X", handle: "@magicworks", href: "https://x.com/50fromspaces", Icon: XLogo },
+  email: { label: "Email", handle: "hello@naverdev.cloud", href: "mailto:hello@naverdev.cloud", Icon: EnvelopeSimple },
+  whatsapp: { label: "WhatsApp", handle: "+62 851 8727 7828", href: "https://wa.me/6285187287828", Icon: WhatsappLogo },
 } satisfies Record<string, { label: string; handle: string; href: string; Icon: PhosphorIcon }>;
 
 type ReachChannel = { key: string; label: string; handle: string; href: string; Icon: PhosphorIcon };
