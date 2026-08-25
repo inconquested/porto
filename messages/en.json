@@ -1,0 +1,287 @@
+{
+  "Index": {
+    "hero": {
+      "main": "Building Fast, Reliable, and User-Friendly Applications",
+      "subtitle": "I help turn ideas into web and mobile applications that solve real problems, from early validation to production-ready products.",
+      "cta": "View Work"
+    },
+    "about": {
+      "eyebrow": "whoami",
+      "title": "About Me",
+      "lede": "As a kid, I dreamed of becoming a magician. Technology turned out to be the closest thing to real magic.",
+      "detail": "That's why I started Magicworks. I enjoy turning ideas into digital products, from understanding the problem and designing the system to shipping applications that are ready to use.",
+      "facts": [
+        {
+          "label": "name",
+          "value": "Muhamad Revan Aulia"
+        },
+        {
+          "label": "alias",
+          "value": "\"Naver\""
+        },
+        {
+          "label": "role",
+          "value": "Software developer, founder of Magicworks"
+        },
+        {
+          "label": "base",
+          "value": "Indonesia"
+        }
+      ]
+    },
+    "experience": {
+      "eyebrow": "git log",
+      "title": "Experience",
+      "subtitle": "Learning through competitions and real-world projects",
+      "lists": [
+        {
+          "title": "Software Engineering Student",
+          "subtitle": "SMK Negeri 1 Cimahi",
+          "description": "Studying software development fundamentals, algorithms, databases, web development, and collaborative application development practices."
+        },
+        {
+          "title": "LKS Web Technologies 2026 Provincial Competitor",
+          "subtitle": "Web Development Competition",
+          "description": "Built web applications under strict time constraints, focusing on problem-solving, implementation quality, and development efficiency."
+        },
+        {
+          "title": "Freelance Web & Mobile Developer",
+          "subtitle": "Magicworks",
+          "description": "Helping clients build digital products from planning and system design to implementation, deployment, and ongoing maintenance."
+        }
+      ]
+    },
+    "project": {
+      "eyebrow": "ls ./works",
+      "title": "Selected Magic*works*",
+      "subtitle": "Each one built to solve a different kind of problem.",
+      "lists": [
+        {
+          "title": "Veritas",
+          "subtitle": "Project Management Platform",
+          "tech_stack": [
+            "Next.js",
+            "Supabase",
+            "Hono.js",
+            "Prisma ORM"
+          ],
+          "description": "A web-based platform that helps clients track project progress, coordinate with vendors or freelancers, and handle payments through an escrow system.",
+          "demo_url": "",
+          "repo_url": "",
+          "case_study": {
+            "problem": "You scroll a group chat to find who approved the last milestone. You miss the message. You pay for work you have not seen.",
+            "solution": "I built one board. I show the same milestones to client and freelancer. I hold payment in escrow. You release it when you approve the deliverable.",
+            "highlights": [
+              "One board holds milestones, files, and approvals in one place",
+              "Escrow releases after you approve. Roles lock who sees what"
+            ]
+          }
+        },
+        {
+          "title": "Electa",
+          "subtitle": "Digital Voting Platform",
+          "tech_stack": [
+            "MySQL",
+            "Laravel",
+            "React.js"
+          ],
+          "description": "A web-based voting application designed to make elections more practical, transparent, and accessible.",
+          "demo_url": "",
+          "repo_url": "",
+          "case_study": {
+            "problem": "You print 400 ballots. You count by hand for three hours. Students crowd the table and you hear doubts about the result.",
+            "solution": "I kept the ballot simple. You tap your choice on any phone. I count the moment you submit. I show a live tally you can audit. I lock one vote per student.",
+            "highlights": [
+              "One vote per student, verified before you submit",
+              "Live tally with audit trail on every device"
+            ]
+          }
+        },
+        {
+          "title": "Rosa",
+          "subtitle": "AI-Powered Text-To-3D Floorplan Layout Generator",
+          "tech_stack": [
+            "React Three Fiber",
+            "Next.js",
+            "Anthropic AI SDK",
+            "Mistral AI",
+            "Vercel"
+          ],
+          "description": "A web-based platform that turns natural-language room descriptions into walkable 3D floorplan layouts, reasoning about adjacencies and spatial constraints.",
+          "demo_url": "",
+          "repo_url": "https://github.com/inconquested/rosa-miniporto",
+          "case_study": {
+            "problem": "You describe a room with light from the north. You sketch walls for an afternoon. The client asks for the door on the other side and you start over.",
+            "solution": "I built Rosa to read your text. I map adjacency and place walls. I render a plan you can walk in the browser. You type a follow-up and I move the door.",
+            "highlights": [
+              "Text to 3D in the browser. You see the plan at once",
+              "Follow-up prompts move walls without redrawing"
+            ]
+          }
+        }
+      ],
+      "study": {
+        "label": "Case Study",
+        "problem": "Problem",
+        "solution": "Solution",
+        "highlights": "Highlights",
+        "close": "Close"
+      }
+    },
+    "skill": {
+      "eyebrow": "cat stack.json",
+      "title": "Services & Expertise",
+      "subtitle": "The technologies I use to build applications from the frontend all the way to infrastructure.",
+      "lists": [
+        {
+          "title": "Fullstack Development",
+          "subtitle": "Frontend, Backend & API",
+          "description": "Building complete web and mobile applications with backend, database, authentication, and API integration."
+        },
+        {
+          "title": "System Design",
+          "subtitle": "Architecture & Scalability",
+          "description": "Designing clean, maintainable system architectures that scale with business needs."
+        },
+        {
+          "title": "AI Integration",
+          "subtitle": "Machine Learning & Automation",
+          "description": "Integrating AI and machine learning models to automate processes and add intelligent features with real value."
+        },
+        {
+          "title": "Testing & Deployment",
+          "subtitle": "Quality Assurance",
+          "description": "Running tests, deployment, and monitoring so applications stay stable and reliable after release."
+        }
+      ],
+      "tech_stack": {
+        "frontend_and_ui": [
+          "Next.js",
+          "React.js",
+          "Laravel Blade",
+          "Livewire",
+          "Tailwind CSS",
+          "HTML5 / CSS3",
+          "React Three Fiber",
+          "Framer Motion"
+        ],
+        "backend_and_api": [
+          "Laravel",
+          "Node.js",
+          "Express.js",
+          "Hono.js",
+          "FastAPI",
+          "PHP"
+        ],
+        "mobile_development": [
+          "Flutter",
+          "Kotlin",
+          "Java",
+          "Firebase"
+        ],
+        "desktop_and_cross_platform": [
+          "Kotlin Multiplatform",
+          ".NET MAUI",
+          ".NET WPF",
+          ".NET WinForms",
+          "Swing"
+        ],
+        "database_and_storage": [
+          "MySQL",
+          "PostgreSQL",
+          "SQLite",
+          "Firebase Firestore",
+          "Supabase"
+        ],
+        "orm_and_database_tools": [
+          "Prisma ORM"
+        ],
+        "ai": [
+          "Google Cloud AI",
+          "Anthropic AI SDK",
+          "Mistral AI",
+          "Google Cloud Vertex AI",
+          "Vercel AI SDK"
+        ],
+        "machine_learning": [
+          "Python",
+          "Scikit-learn",
+          "Jupyter Notebook",
+          "Numpy",
+          "Pandas"
+        ],
+        "cloud_and_infrastructure": [
+          "AWS",
+          "Cloudflare",
+          "Vercel"
+        ],
+        "development_tools": [
+          "Ngrok",
+          "Git",
+          "Github Actions"
+        ],
+        "testing": [
+          "Playwright",
+          "Puppeteer"
+        ]
+      }
+    },
+    "education": {
+      "eyebrow": "cat README",
+      "title": "Education",
+      "subtitle": "Academic Background",
+      "lists": {
+        "title": "Software Engineering",
+        "subtitle": "SMK Negeri 1 Cimahi",
+        "description": "Studied software development fundamentals, algorithms, databases, web development, and collaborative application development practices."
+      }
+    },
+    "cta": {
+      "eyebrow": "Plant an idea. Harvest a product.",
+      "title": "Have a project in mind?",
+      "subtitle": "I'd love to hear about it. Whether you're starting from scratch or improving an existing system, let's build it together.",
+      "button": "Reach Out"
+    }
+  },
+  "Header": {
+    "home": "Home",
+    "about": "About",
+    "experience": "Experience",
+    "project": "Projects",
+    "skill": "Skills",
+    "education": "Education",
+    "cta": "Contact"
+  },
+  "Footer": {
+    "available": "Available for new projects",
+    "tagline": "Turning ideas into software, from the first seed to a system running in production.",
+    "sitemap": "sitemap",
+    "connect": "connect",
+    "colophon": "colophon",
+    "colophonText": "Built with Next.js and Tailwind, hand-set over a living ASCII field.",
+    "location": "Cimahi, Indonesia",
+    "backToTop": "Back to top",
+    "rights": "grown from digital seeds"
+  },
+  "Keyboard": {
+    "title": "Keyboard Shortcuts",
+    "open": "Keyboard shortcuts",
+    "close": "Close",
+    "sections": "Jump to section",
+    "nav": "Next / previous section",
+    "top": "Scroll to top",
+    "theme": "Toggle theme",
+    "menu": "Toggle menu",
+    "help": "Show this help",
+    "hint": "Shortcuts work anywhere on the page."
+  },
+  "Github": {
+    "trigger": "git log --recent",
+    "title": "Recent Commits",
+    "caption": "Live commit history, pulled straight from GitHub.",
+    "empty": "No public commits to show right now.",
+    "error": "Couldn't reach GitHub. Try again in a moment.",
+    "retry": "Retry",
+    "profile": "Profile"
+  }
+}

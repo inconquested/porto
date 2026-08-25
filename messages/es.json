@@ -1,0 +1,287 @@
+{
+  "Index": {
+    "hero": {
+      "main": "Creando aplicaciones rápidas, confiables y fáciles de usar",
+      "subtitle": "Transformo ideas en aplicaciones web y móviles que resuelven problemas reales, desde la validación inicial hasta un producto listo para producción.",
+      "cta": "Ver proyectos"
+    },
+    "about": {
+      "eyebrow": "whoami",
+      "title": "Sobre mí",
+      "lede": "De pequeño soñaba con ser mago. La tecnología resultó ser lo más parecido a la magia real.",
+      "detail": "Por eso nació Magicworks. Disfruto transformar ideas en productos digitales, desde comprender el problema y diseñar el sistema hasta desarrollar aplicaciones listas para usarse.",
+      "facts": [
+        {
+          "label": "nombre",
+          "value": "Muhamad Revan Aulia"
+        },
+        {
+          "label": "alias",
+          "value": "\"Naver\""
+        },
+        {
+          "label": "rol",
+          "value": "Desarrollador de software, fundador de Magicworks"
+        },
+        {
+          "label": "base",
+          "value": "Indonesia"
+        }
+      ]
+    },
+    "experience": {
+      "eyebrow": "git log",
+      "title": "Experiencia",
+      "subtitle": "Aprendiendo a través de competencias y proyectos reales",
+      "lists": [
+        {
+          "title": "Estudiante de Ingeniería de Software",
+          "subtitle": "SMK Negeri 1 Cimahi",
+          "description": "Estudié los fundamentos del desarrollo de software, algoritmos, bases de datos, desarrollo web y prácticas de colaboración en proyectos de desarrollo de aplicaciones."
+        },
+        {
+          "title": "Competidor de LKS Web Technologies 2026 (Nivel Provincial)",
+          "subtitle": "Competencia de Desarrollo Web",
+          "description": "Desarrollé aplicaciones web bajo estrictos límites de tiempo, enfocándome en la resolución de problemas, la calidad de la implementación y la eficiencia del desarrollo."
+        },
+        {
+          "title": "Desarrollador Web y Móvil Freelance",
+          "subtitle": "Magicworks",
+          "description": "Ayudo a clientes a crear productos digitales, desde la planificación y el diseño de la arquitectura hasta la implementación, el despliegue y el mantenimiento continuo."
+        }
+      ]
+    },
+    "project": {
+      "eyebrow": "ls ./works",
+      "title": "Proyectos Destacados",
+      "subtitle": "Una selección de proyectos desarrollados para resolver diferentes necesidades.",
+      "lists": [
+        {
+          "title": "Veritas",
+          "subtitle": "Plataforma de Gestión de Proyectos",
+          "tech_stack": [
+            "Next.js",
+            "Supabase",
+            "Hono.js",
+            "Prisma ORM"
+          ],
+          "description": "Una plataforma web que permite a los clientes supervisar el progreso de sus proyectos, colaborar con proveedores o freelancers y gestionar pagos mediante un sistema integrado de depósito en garantía (escrow).",
+          "demo_url": "",
+          "repo_url": "",
+          "case_study": {
+            "problem": "Buscas en el chat grupal quién aprobó el último hito. No ves el mensaje. Pagas por un trabajo que aún no revisaste.",
+            "solution": "Construí un tablero único. Muestro los mismos hitos al cliente y al freelancer. Retengo el pago en escrow. Tú lo liberas cuando apruebas la entrega.",
+            "highlights": [
+              "Un tablero reúne hitos, archivos y aprobaciones",
+              "El escrow se libera tras tu aprobación. Los roles controlan la vista"
+            ]
+          }
+        },
+        {
+          "title": "Electa",
+          "subtitle": "Plataforma de Votación Digital",
+          "tech_stack": [
+            "MySQL",
+            "Laravel",
+            "React.js"
+          ],
+          "description": "Una aplicación web diseñada para hacer que los procesos de votación sean más accesibles, transparentes y fáciles de administrar.",
+          "demo_url": "",
+          "repo_url": "https://github.com/inconquested/rosa-miniporto",
+          "case_study": {
+            "problem": "Imprimes 400 papeletas. Cuentas a mano durante tres horas. Los estudiantes se amontonan y escuchas dudas sobre el resultado.",
+            "solution": "Mantengo la papeleta simple. Tocas tu elección en cualquier móvil. Cuento en cuanto envías. Muestro el recuento en vivo que puedes auditar. Bloqueo un voto por estudiante.",
+            "highlights": [
+              "Un voto por estudiante, verificado antes de enviar",
+              "Recuento en vivo con rastro auditable en cada dispositivo"
+            ]
+          }
+        },
+        {
+          "title": "Rosa",
+          "subtitle": "Generador de Planos 3D a partir de Texto con IA",
+          "tech_stack": [
+            "React Three Fiber",
+            "Next.js",
+            "Anthropic AI SDK",
+            "Mistral AI",
+            "Vercel"
+          ],
+          "description": "Plataforma web que convierte descripciones en lenguaje natural en distribuciones 3D navegables, razonando sobre la adyacencia y las restricciones espaciales.",
+          "demo_url": "",
+          "repo_url": "https://github.com/inconquested/rosa-miniporto",
+          "case_study": {
+            "problem": "Describes una habitación con luz del norte. Dibujas muros toda la tarde. El cliente pide la puerta en el otro lado y empiezas de nuevo.",
+            "solution": "Construí Rosa para leer tu texto. Mapeo adyacencias y coloco muros. Renderizo un plano que recorres en el navegador. Escribes un nuevo prompt y muevo la puerta.",
+            "highlights": [
+              "De texto a 3D en el navegador. Ves el plano al instante",
+              "Prompts de seguimiento mueven muros sin redibujar"
+            ]
+          }
+        }
+      ],
+      "study": {
+        "label": "Caso de estudio",
+        "problem": "Problema",
+        "solution": "Solución",
+        "highlights": "Puntos clave",
+        "close": "Cerrar"
+      }
+    },
+    "skill": {
+      "eyebrow": "cat stack.json",
+      "title": "Servicios y Especialidades",
+      "subtitle": "Tecnologías que utilizo para desarrollar aplicaciones, desde el frontend hasta la infraestructura.",
+      "lists": [
+        {
+          "title": "Desarrollo Full Stack",
+          "subtitle": "Frontend, Backend y APIs",
+          "description": "Desarrollo aplicaciones web y móviles completas, incluyendo backend, bases de datos, autenticación e integración de APIs."
+        },
+        {
+          "title": "Diseño de Sistemas",
+          "subtitle": "Arquitectura y Escalabilidad",
+          "description": "Diseño arquitecturas limpias y mantenibles que pueden crecer junto con las necesidades del negocio."
+        },
+        {
+          "title": "Integración de IA",
+          "subtitle": "Machine Learning y Automatización",
+          "description": "Integro soluciones de inteligencia artificial y aprendizaje automático para automatizar procesos y añadir funcionalidades inteligentes donde realmente aportan valor."
+        },
+        {
+          "title": "Pruebas y Despliegue",
+          "subtitle": "Aseguramiento de la Calidad",
+          "description": "Realizo pruebas, despliegues y monitoreo para garantizar que las aplicaciones funcionen de forma estable en producción."
+        }
+      ],
+      "tech_stack": {
+        "frontend_and_ui": [
+          "Next.js",
+          "React.js",
+          "Laravel Blade",
+          "Livewire",
+          "Tailwind CSS",
+          "HTML5 / CSS3",
+          "React Three Fiber",
+          "Framer Motion"
+        ],
+        "backend_and_api": [
+          "Laravel",
+          "Node.js",
+          "Express.js",
+          "Hono.js",
+          "FastAPI",
+          "PHP"
+        ],
+        "mobile_development": [
+          "Flutter",
+          "Kotlin",
+          "Java",
+          "Firebase"
+        ],
+        "desktop_and_cross_platform": [
+          "Kotlin Multiplatform",
+          ".NET MAUI",
+          ".NET WPF",
+          ".NET WinForms",
+          "Swing"
+        ],
+        "database_and_storage": [
+          "MySQL",
+          "PostgreSQL",
+          "SQLite",
+          "Firebase Firestore",
+          "Supabase"
+        ],
+        "orm_and_database_tools": [
+          "Prisma ORM"
+        ],
+        "ai": [
+          "Google Cloud AI",
+          "Anthropic AI SDK",
+          "Mistral AI",
+          "Google Cloud Vertex AI",
+          "Vercel AI SDK"
+        ],
+        "machine_learning": [
+          "Python",
+          "Scikit-learn",
+          "Jupyter Notebook",
+          "Numpy",
+          "Pandas"
+        ],
+        "cloud_and_infrastructure": [
+          "AWS",
+          "Cloudflare",
+          "Vercel"
+        ],
+        "development_tools": [
+          "Ngrok",
+          "Git",
+          "Github Actions"
+        ],
+        "testing": [
+          "Playwright",
+          "Puppeteer"
+        ]
+      }
+    },
+    "education": {
+      "eyebrow": "cat README",
+      "title": "Educación",
+      "subtitle": "Formación Académica",
+      "lists": {
+        "title": "Ingeniería de Software",
+        "subtitle": "SMK Negeri 1 Cimahi",
+        "description": "Estudié los fundamentos del desarrollo de software, algoritmos, bases de datos, desarrollo web y prácticas de colaboración en proyectos de desarrollo de aplicaciones."
+      }
+    },
+    "cta": {
+      "eyebrow": "Siembra una idea. Cosecha un producto.",
+      "title": "¿Tienes un proyecto en mente?",
+      "subtitle": "Me encantaría conocer tu idea. Ya sea para crear un producto desde cero o mejorar un sistema existente, hagámoslo realidad juntos.",
+      "button": "Contactar"
+    }
+  },
+  "Header": {
+    "home": "Inicio",
+    "about": "Sobre mí",
+    "experience": "Experiencia",
+    "project": "Proyectos",
+    "skill": "Habilidades",
+    "education": "Educación",
+    "cta": "Contacto"
+  },
+  "Footer": {
+    "available": "Disponible para nuevos proyectos",
+    "tagline": "Convierto ideas en software, desde la primera semilla hasta un sistema en producción.",
+    "sitemap": "mapa del sitio",
+    "connect": "conectar",
+    "colophon": "colofón",
+    "colophonText": "Hecho con Next.js y Tailwind, compuesto a mano sobre un campo ASCII vivo.",
+    "location": "Cimahi, Indonesia",
+    "backToTop": "Volver arriba",
+    "rights": "cultivado desde semillas digitales"
+  },
+  "Keyboard": {
+    "title": "Atajos de teclado",
+    "open": "Atajos de teclado",
+    "close": "Cerrar",
+    "sections": "Ir a la sección",
+    "nav": "Sección siguiente / anterior",
+    "top": "Ir arriba",
+    "theme": "Cambiar tema",
+    "menu": "Alternar menú",
+    "help": "Mostrar esta ayuda",
+    "hint": "Los atajos funcionan en cualquier parte de la página."
+  },
+  "Github": {
+    "trigger": "git log --recent",
+    "title": "Commits recientes",
+    "caption": "Historial de commits en vivo, directo desde GitHub.",
+    "empty": "No hay commits públicos para mostrar ahora mismo.",
+    "error": "No se pudo conectar con GitHub. Inténtalo en un momento.",
+    "retry": "Reintentar",
+    "profile": "Perfil"
+  }
+}

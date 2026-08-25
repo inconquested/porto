@@ -1,26 +1,560 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "dither-plugin";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* Cinematic ASCII Nature surfaces & accent (DESIGN.md) */
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-line: var(--line);
+
+  /* shadcn-style aliases kept mapped so any consuming component resolves */
+  --color-card: var(--card);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--foreground);
+  --color-primary: var(--accent);
+  --color-primary-foreground: var(--accent-foreground);
+  --color-secondary: var(--surface);
+  --color-secondary-foreground: var(--foreground);
+  --color-muted: var(--surface);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent-ui: var(--accent);
+  --color-destructive: var(--destructive);
+  --color-border: var(--line);
+  --color-input: var(--line);
+  --color-ring: var(--accent);
+
+  /* Fonts: Italiana (display) / Manrope (body) / JetBrains Mono (terminal UI) */
+  --font-sans: var(--font-body);
+  --font-body: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-display);
+
+  /* Soft radius for glass containers; controls go full-pill at the call site */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.5rem;
+
+  --z-base: 0;
+  --z-sticky: 30;
+  --z-nav: 40;
+  --z-overlay: 50;
+  --z-toast: 60;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ── Light Mode — Archival Printout ──────────────────────────────────── */
+:root {
+  --radius: 0.875rem;
+
+  --background: #f9f9f6;
+  --foreground: #1a1a1a;
+
+  --surface: #ffffff;
+  --surface-2: #f1f1ec;
+
+  --accent: #4f46e5; /* calm violet, tuned for AA on paper */
+  --accent-foreground: #f9f9f6;
+
+  --line: rgba(26, 26, 26, 0.14);
+  --muted-foreground: #5b5b57;
+
+  --card: #ffffff;
+  --destructive: #b42318;
+
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(26, 26, 26, 0.12);
+  --glass-highlight: rgba(255, 255, 255, 0.9);
+
+  /* Vercel-style plate/chip fill: near-solid so copy reads cleanly over ASCII */
+  --plate-bg: rgba(255, 255, 255, 0.82);
+
+  --accent-glow: rgba(99, 102, 241, 0.32);
+  --ascii-ink: #1a1a1a;
+  --ascii-opacity: 0.09;
+  --scanline: rgba(26, 26, 26, 0.02);
+  --vignette: rgba(26, 26, 26, 0.05);
+}
+
+/* ── Dark Mode — Terminal Noir ───────────────────────────────────────── */
+.dark {
+  --background: #0c0c0c;
+  --foreground: #f5f5f0; /* ivory / bone */
+
+  --surface: #141414;
+  --surface-2: #101010;
+
+  --accent: #818cf8; /* calm violet, tuned for AA on noir */
+  --accent-foreground: #0c0c0c;
+
+  --line: rgba(245, 245, 240, 0.14);
+  --muted-foreground: #9a9a93;
+
+  --card: #141414;
+  --destructive: #ff6b5b;
+
+  --glass-bg: rgba(20, 20, 20, 0.42);
+  --glass-border: rgba(245, 245, 240, 0.14);
+  --glass-highlight: rgba(245, 245, 240, 0.1);
+
+  --plate-bg: rgba(16, 16, 16, 0.72);
+
+  --accent-glow: rgba(129, 140, 248, 0.5);
+  --ascii-ink: #f5f5f0;
+  --ascii-opacity: 0.12;
+  --scanline: rgba(245, 245, 240, 0.05);
+  --vignette: rgba(0, 0, 0, 0.55);
+}
+
+/* Cursor-proximity spotlight vars (surface-spotlight.tsx). Registered so they
+   have typed defaults; --spot-i 0 keeps every surface dark until the cursor
+   nears it, and the off-canvas x/y park the glow out of view. */
+@property --spot-i {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+@property --spot-x {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: -999px;
+}
+@property --spot-y {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: -999px;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    color-scheme: light dark;
+    scrollbar-gutter: stable;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  :where(img, video) {
+    max-width: 100%;
+  }
+  :where(img) {
+    height: auto;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-foreground);
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+    /* Long headlines (esp. German compounds) break instead of overflowing the
+       viewport; only kicks in for words that genuinely can't fit. */
+    overflow-wrap: break-word;
+  }
+  p {
+    text-wrap: pretty;
+  }
+
+  /* ── Locale-aware typography (Task 2 — expect characters to change) ─────
+     The Italiana/Playfair display face carries no CJK glyphs, so Chinese
+     headings fall back to the system serif; the design's negative tracking and
+     sub-1 leading cramp ideographs, so relax both for CJK locales. */
+  html[lang^="zh"] .font-display {
+    letter-spacing: 0;
+    line-height: 1.16;
+  }
+  html[lang^="zh"] .font-mono {
+    letter-spacing: 0;
+  }
+  /* German and Spanish carry the longest words; allow hyphenation so display
+     copy re-flows gracefully in narrow columns instead of clipping. */
+  html[lang^="de"] :where(h1, h2, h3),
+  html[lang^="es"] :where(h1, h2, h3) {
+    hyphens: auto;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Frosted terminal glass — heavy blur + 1px elegant border, lets the ASCII
+     nature backdrop bleed through (DESIGN.md — textured glassmorphism). */
+  .glass {
+    /* Surface spotlight (surface-spotlight.tsx): an accent glow painted into the
+       card's OWN background, so it's clipped to the rounded surface (masked) and
+       sits under the content. --spot-x/y/-i are driven by pointer proximity;
+       at rest --spot-i is 0 so the layer is fully transparent. */
+    background:
+      radial-gradient(
+        circle 240px at var(--spot-x, -999px) var(--spot-y, -999px),
+        color-mix(in oklab, var(--accent) calc(var(--spot-i, 0) * 26%), transparent) 0%,
+        transparent 70%
+      ),
+      var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    backdrop-filter: blur(20px) saturate(140%);
+    box-shadow:
+      inset 0 1px 0 var(--glass-highlight),
+      0 24px 70px -40px rgba(0, 0, 0, 0.6);
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .glass {
+      background: var(--surface);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
+  /* Vercel-style hairline plate — flat bordered backing that lifts free-floating
+     copy off the busy ASCII field so it reads clearly. Quieter than .glass:
+     hairline border + near-solid fill + a crisp top highlight, no heavy shadow. */
+  .plate {
+    /* Same cursor-proximity spotlight as .glass, quieter for text legibility. */
+    background:
+      radial-gradient(
+        circle 180px at var(--spot-x, -999px) var(--spot-y, -999px),
+        color-mix(in oklab, var(--accent) calc(var(--spot-i, 0) * 15%), transparent) 0%,
+        transparent 72%
+      ),
+      var(--plate-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-xl);
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+
+  /* Vercel-style label badge — hairline-bordered mono chip for eyebrows and
+     category kickers that would otherwise float unreadably over the ASCII. */
+  .chip {
+    @apply inline-flex items-center gap-2 font-mono text-[12px] font-medium;
+    padding: 0.3rem 0.7rem;
+    background: var(--plate-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .plate,
+    .chip {
+      background: var(--surface);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
+  /* Double-bezel shell (nested enclosure) — a machined outer tray that seats
+     the glass core. Concentric curves: outer radius = radius-xl + shell pad. */
+  .bezel {
+    padding: 0.375rem;
+    border: 1px solid var(--line);
+    border-radius: calc(var(--radius-xl) + 0.375rem);
+    background: color-mix(in oklab, var(--foreground) 4%, transparent);
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
+  }
+
+  /* Bracketed micro-action base (DESIGN.md — > REACH_OUT). Pill-family. */
+  .pill {
+    @apply inline-flex items-center justify-center gap-2 font-mono text-[13px] font-medium uppercase tracking-wider;
+    border-radius: 9999px;
+  }
+
+  /* Classical arch / oval image masks (DESIGN.md — The Arch & The Grid) */
+  .mask-arch {
+    border-radius: 44% 44% var(--radius) var(--radius) / 30% 30% var(--radius) var(--radius);
+  }
+  .mask-oval {
+    border-radius: 50%;
+  }
+  /* Squircle — superellipse for work thumbs (iOS-like continuous curvature) */
+  .mask-squircle {
+    border-radius: 32px;
+    corner-shape: squircle;
+  }
+  @supports (corner-shape: superellipse(2)) {
+    .mask-squircle {
+      corner-shape: superellipse(1.8);
+    }
+  }
+
+  /* Accent glow for raw terminal type (skill tags, prompts) */
+  .accent-glow {
+    text-shadow: 0 0 14px var(--accent-glow);
+  }
+
+  /* Blinking terminal caret */
+  .cursor {
+    display: inline-block;
+    width: 0.55ch;
+    background: currentColor;
+    animation: blink 1.05s step-end infinite;
+  }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+/* Theme switch — the incoming theme wipes in as a circle growing from the
+   toggle button (origin seeded via --theme-x/--theme-y in providers.tsx).
+   Falls back to an instant swap where View Transitions aren't supported. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+/* Hold the outgoing theme perfectly still underneath while the incoming theme
+   grows over it as a single crisp circle seeded at the toggle button. */
+::view-transition-old(root) {
+  z-index: 0;
+}
+::view-transition-new(root) {
+  z-index: 1;
+  animation: theme-reveal 0.58s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: var(--theme-x, 50%) var(--theme-y, 50%);
+}
+@keyframes theme-reveal {
+  from {
+    clip-path: circle(0 at var(--theme-x, 50%) var(--theme-y, 50%));
+  }
+  to {
+    clip-path: circle(150vmax at var(--theme-x, 50%) var(--theme-y, 50%));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(root) { animation: none; }
+}
+
+/* Section-title "sheen" — a bar of accent light sweeps the letters on enter
+   (DESIGN.md digital-sorcery + Task 5 magicworks decor). Clipped to the glyphs. */
+.title-sheen {
+  background: linear-gradient(100deg, transparent 38%, var(--accent) 50%, transparent 62%);
+  background-size: 220% 100%;
+  background-position: 200% 0;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.title-sheen.run {
+  animation: title-sheen 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+}
+@keyframes title-sheen {
+  from { background-position: 200% 0; }
+  to { background-position: -80% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .title-sheen.run { animation: none; }
+}
+
+/* CRT scanline glow (~2%) + vignette, dark-mode atmosphere (DESIGN.md) */
+.crt {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.crt::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    var(--scanline) 2px,
+    var(--scanline) 3px
+  );
+  opacity: 0.4;
+}
+.dark .crt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 40%, transparent 58%, var(--vignette) 100%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dark .crt {
+    animation: flicker 5s infinite steps(1);
+  }
+}
+@keyframes flicker {
+  0%, 97%, 100% { opacity: 1; }
+  98% { opacity: 0.96; }
+  99% { opacity: 0.99; }
+}
+
+/* ── Footer (The Colophon) — its own grounded terminal slab ───────────── */
+/* A distinct surface that seals the page: quiet accent wash over surface-2,
+   a blueprint grid texture edge-faded into the dark, and an accent top seam.
+   In dark mode it reads as soil the page's plants grow up from. */
+.footer-shell {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(140% 120% at 50% 0%, color-mix(in oklab, var(--accent) 7%, transparent) 0%, transparent 55%),
+    var(--surface-2);
+}
+.dark .footer-shell {
+  background:
+    radial-gradient(140% 120% at 50% 0%, color-mix(in oklab, var(--accent) 12%, transparent) 0%, transparent 55%),
+    linear-gradient(180deg, var(--background) 0%, var(--surface) 100%);
+}
+/* Blueprint grid, faded by a radial mask so it grounds without a hard box */
+.footer-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 3.5rem 3.5rem;
+  -webkit-mask-image: radial-gradient(125% 100% at 50% 0%, #000 26%, transparent 78%);
+  mask-image: radial-gradient(125% 100% at 50% 0%, #000 26%, transparent 78%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+/* Accent hairline sealing the top edge of the slab */
+.footer-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* Kinetic wordmark band — the giant sign-off drifts like wind over a field.
+   Track holds two identical halves; translating one full half loops seamless. */
+.footer-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.footer-marquee__track {
+  display: inline-flex;
+  width: max-content;
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform;
+  animation: footer-marquee 36s linear infinite;
+}
+.footer-marquee:hover .footer-marquee__track {
+  animation-play-state: paused;
+}
+@keyframes footer-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Ambient accent glow drifting behind the band */
+.footer-glow {
+  will-change: transform;
+  animation: footer-glow-drift 17s ease-in-out infinite alternate;
+}
+@keyframes footer-glow-drift {
+  from {
+    transform: translate3d(-9%, 0, 0);
+  }
+  to {
+    transform: translate3d(9%, 0, 0);
+  }
+}
+
+/* ── Skills decorations (tmp/referrences) ─────────────────────────────── */
+/* Vertical circuit "skill-tree" rail (decorations1.png) — a blueprint trunk
+   with branching nodes and an energy pulse travelling down it, echoing the
+   page's root-system motif. Rendered in accent violet, terminal-annotated. */
+.circuit-trunk {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    color-mix(in oklab, var(--accent) 55%, transparent) 14%,
+    color-mix(in oklab, var(--accent) 55%, transparent) 86%,
+    transparent 100%
+  );
+}
+.circuit-pulse {
+  animation: circuit-pulse 5s linear infinite;
+}
+@keyframes circuit-pulse {
+  0% { top: 2%; opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { top: 98%; opacity: 0; }
+}
+.circuit-node {
+  animation: circuit-node 5s ease-in-out infinite;
+}
+@keyframes circuit-node {
+  0%, 100% { opacity: 0.55; box-shadow: 0 0 8px -2px var(--accent-glow); }
+  50% { opacity: 1; box-shadow: 0 0 15px 1px var(--accent-glow); }
+}
+
+/* ── Magic cursor (custom animated cursor, "magicworks" theme) ────────── */
+/* A rune ring + dot that replaces the native pointer. The .cursor-magic class
+   is toggled from spell-cursor.tsx only on fine pointers with motion allowed,
+   so touch / keyboard / reduced-motion users keep the native cursor intact. */
+html.cursor-magic,
+html.cursor-magic * {
+  cursor: none !important;
+}
+.magic-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 70;
+  opacity: 0;
+  border-radius: 9999px;
+  pointer-events: none;
+  will-change: transform;
+}
+.magic-cursor--ring {
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border: 1px solid color-mix(in oklab, var(--accent) 70%, transparent);
+  box-shadow:
+    0 0 16px -2px var(--accent-glow),
+    inset 0 0 10px -6px var(--accent-glow);
+}
+.magic-cursor--dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--accent);
+  box-shadow: 0 0 10px 0 var(--accent-glow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

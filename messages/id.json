@@ -1,0 +1,287 @@
+{
+  "Index": {
+    "hero": {
+      "main": "Membangun aplikasi yang cepat, mudah, dan andal",
+      "subtitle": "Setiap proyek adalah kesempatan untuk membuktikan bahwa ide yang baik bisa diwujudkan dengan teknologi yang tepat.",
+      "cta": "Lihat Karya"
+    },
+    "about": {
+      "eyebrow": "whoami",
+      "title": "Tentang Saya",
+      "lede": "Sedari kecil, saya bercita-cita menjadi pesulap. Teknologi ternyata adalah bentuk sulap paling nyata.",
+      "detail": "Itulah alasan saya membangun Magicworks. Saya menikmati mengubah ide menjadi produk digital, mulai dari memahami kebutuhan, merancang sistem, hingga meluncurkan aplikasi yang siap digunakan.",
+      "facts": [
+        {
+          "label": "nama",
+          "value": "Muhamad Revan Aulia"
+        },
+        {
+          "label": "alias",
+          "value": "\"Naver\""
+        },
+        {
+          "label": "peran",
+          "value": "Software developer, pendiri Magicworks"
+        },
+        {
+          "label": "domisili",
+          "value": "Indonesia"
+        }
+      ]
+    },
+    "experience": {
+      "eyebrow": "git log",
+      "title": "Pengalaman",
+      "subtitle": "Belajar melalui kompetisi dan pengalaman mengerjakan proyek",
+      "lists": [
+        {
+          "title": "Siswa Rekayasa Perangkat Lunak",
+          "subtitle": "SMK Negeri 1 Cimahi",
+          "description": "Mempelajari dasar-dasar pengembangan perangkat lunak, algoritma, basis data, pengembangan web, serta praktik kolaborasi dalam pembuatan aplikasi."
+        },
+        {
+          "title": "Peserta LKS Web Technologies 2026 Tingkat Provinsi",
+          "subtitle": "Kompetisi Pengembangan Web",
+          "description": "Mengembangkan aplikasi web dalam waktu terbatas dengan fokus pada pemecahan masalah, kualitas implementasi, serta efisiensi pengembangan."
+        },
+        {
+          "title": "Freelance Web & Mobile Developer",
+          "subtitle": "Magicworks",
+          "description": "Membantu klien mengembangkan aplikasi mulai dari tahap perencanaan, desain sistem, implementasi, hingga proses deployment dan pemeliharaan."
+        }
+      ]
+    },
+    "project": {
+      "eyebrow": "ls ./works",
+      "title": "Sulap Pilihan",
+      "subtitle": "Beberapa aplikasi yang saya kembangkan untuk menjawab kebutuhan yang berbeda.",
+      "lists": [
+        {
+          "title": "Veritas",
+          "subtitle": "Project Management Platform",
+          "tech_stack": [
+            "Next.js",
+            "Supabase",
+            "Hono.js",
+            "Prisma ORM"
+          ],
+          "description": "Platform berbasis web yang membantu klien memantau progres proyek, mengelola komunikasi dengan vendor atau freelancer, serta menangani proses pembayaran melalui sistem escrow.",
+          "demo_url": "",
+          "repo_url": "https://github.com/inconquested/rosa-miniporto",
+          "case_study": {
+            "problem": "Kamu scroll group chat untuk cari siapa yang approve milestone terakhir. Kamu kelewatan pesannya. Kamu bayar pekerjaan yang belum kamu lihat.",
+            "solution": "Saya bangun satu papan. Saya tampilkan milestone yang sama untuk klien dan freelancer. Saya tahan pembayaran di escrow. Kamu lepas saat kamu setujui hasilnya.",
+            "highlights": [
+              "Satu papan simpan milestone, file, dan persetujuan di satu tempat",
+              "Escrow cair setelah kamu setujui. Role kunci siapa lihat apa"
+            ]
+          }
+        },
+        {
+          "title": "Electa",
+          "subtitle": "Digital Voting Platform",
+          "tech_stack": [
+            "MySQL",
+            "Laravel",
+            "React.js"
+          ],
+          "description": "Aplikasi pemungutan suara berbasis web yang dirancang untuk menghadirkan proses pemilihan yang lebih praktis, transparan, dan mudah diakses.",
+          "demo_url": "",
+          "repo_url": "",
+          "case_study": {
+            "problem": "Kamu cetak 400 surat suara. Kamu hitung manual tiga jam. Siswa berkerumun di meja dan kamu dengar keraguan soal hasil.",
+            "solution": "Saya jaga surat suara tetap sederhana. Kamu tap pilihan di HP apa pun. Saya hitung saat kamu kirim. Saya tampilkan rekap live yang bisa kamu audit. Saya kunci satu suara per siswa.",
+            "highlights": [
+              "Satu suara per siswa, verifikasi sebelum kamu kirim",
+              "Rekap live dengan jejak audit di setiap device"
+            ]
+          }
+        },
+        {
+          "title": "Rosa",
+          "subtitle": "Generator Tata Letak Denah 3D dari Teks Berbasis AI",
+          "tech_stack": [
+            "React Three Fiber",
+            "Next.js",
+            "Anthropic AI SDK",
+            "Mistral AI",
+            "Vercel"
+          ],
+          "description": "Platform berbasis web yang mengubah deskripsi ruangan dalam bahasa alami menjadi tata letak denah 3D yang dapat dijelajahi, dengan memahami hubungan antar ruangan dan batasan spasial.",
+          "demo_url": "",
+          "repo_url": "https://github.com/inconquested/rosa-miniporto",
+          "case_study": {
+            "problem": "Kamu deskripsikan ruangan dengan cahaya dari utara. Kamu sketsa dinding seharian. Klien minta pintu pindah ke sisi lain dan kamu mulai dari nol.",
+            "solution": "Saya bangun Rosa untuk baca tulisanmu. Saya petakan kedekatan ruangan dan pasang dinding. Saya render denah yang bisa kamu jelajahi di browser. Kamu ketik lanjutannya dan saya pindahkan pintunya.",
+            "highlights": [
+              "Teks jadi 3D di browser. Kamu lihat denah langsung",
+              "Prompt lanjutan geser dinding tanpa gambar ulang"
+            ]
+          }
+        }
+      ],
+      "study": {
+        "label": "Studi Kasus",
+        "problem": "Masalah",
+        "solution": "Solusi",
+        "highlights": "Poin Utama",
+        "close": "Tutup"
+      }
+    },
+    "skill": {
+      "eyebrow": "cat stack.json",
+      "title": "Layanan & Keahlian",
+      "subtitle": "Teknologi yang saya gunakan untuk membangun aplikasi dari sisi frontend hingga infrastruktur.",
+      "lists": [
+        {
+          "title": "Fullstack Development",
+          "subtitle": "Frontend, Backend & API",
+          "description": "Mengembangkan aplikasi web dan mobile lengkap dengan backend, database, autentikasi, serta integrasi API."
+        },
+        {
+          "title": "System Design",
+          "subtitle": "Architecture & Scalability",
+          "description": "Merancang struktur aplikasi yang mudah dikembangkan, dipelihara, dan mampu mengikuti pertumbuhan kebutuhan bisnis."
+        },
+        {
+          "title": "AI Integration",
+          "subtitle": "Machine Learning & Automation",
+          "description": "Mengintegrasikan model AI dan machine learning untuk otomatisasi proses maupun pengolahan data sesuai kebutuhan aplikasi."
+        },
+        {
+          "title": "Testing & Deployment",
+          "subtitle": "Quality Assurance",
+          "description": "Melakukan pengujian, deployment, dan monitoring agar aplikasi dapat berjalan dengan stabil setelah dirilis."
+        }
+      ],
+      "tech_stack": {
+        "frontend_and_ui": [
+          "Next.js",
+          "React.js",
+          "Laravel Blade",
+          "Livewire",
+          "Tailwind CSS",
+          "HTML5 / CSS3",
+          "React Three Fiber",
+          "Framer Motion"
+        ],
+        "backend_and_api": [
+          "Laravel",
+          "Node.js",
+          "Express.js",
+          "Hono.js",
+          "FastAPI",
+          "PHP"
+        ],
+        "mobile_development": [
+          "Flutter",
+          "Kotlin",
+          "Java",
+          "Firebase"
+        ],
+        "desktop_and_cross_platform": [
+          "Kotlin Multiplatform",
+          ".NET MAUI",
+          ".NET WPF",
+          ".NET WinForms",
+          "Swing"
+        ],
+        "database_and_storage": [
+          "MySQL",
+          "PostgreSQL",
+          "SQLite",
+          "Firebase Firestore",
+          "Supabase"
+        ],
+        "orm_and_database_tools": [
+          "Prisma ORM"
+        ],
+        "ai": [
+          "Google Cloud AI",
+          "Anthropic AI SDK",
+          "Mistral AI",
+          "Google Cloud Vertex AI",
+          "Vercel AI SDK"
+        ],
+        "machine_learning": [
+          "Python",
+          "Scikit-learn",
+          "Jupyter Notebook",
+          "Numpy",
+          "Pandas"
+        ],
+        "cloud_and_infrastructure": [
+          "AWS",
+          "Cloudflare",
+          "Vercel"
+        ],
+        "development_tools": [
+          "Ngrok",
+          "Git",
+          "Github Actions"
+        ],
+        "testing": [
+          "Playwright",
+          "Puppeteer"
+        ]
+      }
+    },
+    "education": {
+      "eyebrow": "cat README",
+      "title": "Pendidikan",
+      "subtitle": "Latar Belakang Akademik",
+      "lists": {
+        "title": "Rekayasa Perangkat Lunak",
+        "subtitle": "SMK Negeri 1 Cimahi",
+        "description": "Mempelajari dasar-dasar pengembangan perangkat lunak, algoritma, basis data, pengembangan web, serta praktik kolaborasi dalam pembuatan aplikasi."
+      }
+    },
+    "cta": {
+      "eyebrow": "Tanam ide. Panen produk.",
+      "title": "Punya proyek yang ingin dikembangkan?",
+      "subtitle": "Saya terbuka untuk berdiskusi, baik untuk membangun produk baru maupun mengembangkan sistem yang sudah ada.",
+      "button": "Hubungi Saya"
+    }
+  },
+  "Header": {
+    "home": "Beranda",
+    "about": "Tentang Saya",
+    "experience": "Pengalaman",
+    "project": "Proyek",
+    "skill": "Keahlian",
+    "education": "Pendidikan",
+    "cta": "Hubungi Saya"
+  },
+  "Footer": {
+    "available": "Terbuka untuk proyek baru",
+    "tagline": "Mengubah ide menjadi perangkat lunak, dari benih pertama hingga sistem yang berjalan di produksi.",
+    "sitemap": "peta situs",
+    "connect": "terhubung",
+    "colophon": "kolofon",
+    "colophonText": "Dibuat dengan Next.js dan Tailwind, disusun manual di atas ladang ASCII yang hidup.",
+    "location": "Cimahi, Indonesia",
+    "backToTop": "Kembali ke atas",
+    "rights": "tumbuh dari benih digital"
+  },
+  "Keyboard": {
+    "title": "Pintasan Keyboard",
+    "open": "Pintasan keyboard",
+    "close": "Tutup",
+    "sections": "Lompat ke bagian",
+    "nav": "Bagian berikutnya / sebelumnya",
+    "top": "Gulir ke atas",
+    "theme": "Ganti tema",
+    "menu": "Buka/tutup menu",
+    "help": "Tampilkan bantuan ini",
+    "hint": "Pintasan berfungsi di mana saja pada halaman."
+  },
+  "Github": {
+    "trigger": "git log --recent",
+    "title": "Commit Terbaru",
+    "caption": "Riwayat commit langsung dari GitHub.",
+    "empty": "Belum ada commit publik untuk ditampilkan.",
+    "error": "Gagal menghubungi GitHub. Coba lagi sebentar.",
+    "retry": "Coba lagi",
+    "profile": "Profil"
+  }
+}
